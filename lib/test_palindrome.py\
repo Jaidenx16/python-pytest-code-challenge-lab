@@ -1,0 +1,24 @@
+import pytest
+from palindrome import longest_palindromic_substring
+
+
+@pytest.mark.parametrize(
+    ("text", "valid_results"),
+    [
+        ("babad", {"bab", "aba"}),
+        ("cbbd", {"bb"}),
+        ("a", {"a"}),
+        ("ac", {"a", "c"}),
+        ("racecar", {"racecar"}),
+        ("abcd", {"a", "b", "c", "d"}),
+        ("12321", {"12321"}),
+        ("", {""}),
+        ("a" * 1000, {"a" * 1000}),
+    ],
+)
+def test_longest_palindromic_substring(text, valid_results):
+    result = longest_palindromic_substring(text)
+
+    assert result in valid_results
+    assert result == result[::-1]
+    assert result in text
